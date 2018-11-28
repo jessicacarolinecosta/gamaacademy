@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exercicio 5</title>
+</head>
+<body>
+    <button id="btnsorteio">Sortear Fruta</button>
+    <br>
+    <img src="" id="frutaimg" alt="">
+    </div>
+</body>
+</html>
+<script>
+    var frutas = [
+        {
+            fruta: "uva",
+            imagem: "uva.png"
+        },
+        {
+            fruta: "maca",
+            imagem: "maca.png"
+        },
+        {
+            fruta: "abacate",
+            imagem: "abacate.png"
+        },
+        {
+            fruta: "laranja",
+            imagem: "laranja.png"
+        },
+        {
+            fruta: "pera",
+            imagem: "pera.jpg"
+        },
+        {
+            fruta: "abacaxi",
+            imagem: "abacaxi.jpg"
+        },
+        {
+            fruta: "banana",
+            imagem: "banana.png"
+        },
+        {
+            fruta: "amora",
+            imagem: "amora.jpg"
+        },
+        {
+            fruta: "jabuticaba",
+            imagem: "jabuticaba.png"
+        },
+        {
+            fruta: "kiwi",
+            imagem: "kiwi.png"
+        }
+    ];
+
+    var frutasClone = [...frutas];
+
+    document.getElementById("btnsorteio").addEventListener("click", showImg);
+ 
+    function showImg() {
+        if(frutas.length==0)
+            frutas = [...frutasClone];
+
+        let index = Math.floor((Math.random() * frutas.length));
+        document.getElementById('frutaimg').setAttribute('src',frutas[index].imagem);
+        frutas.splice(index,1);
+    }
+</script>

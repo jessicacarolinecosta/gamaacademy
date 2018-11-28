@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exercicio 3</title>
+</head>
+<body>
+    <input type="text" name="texto" id="texto">
+    <br>
+    <img src="" id="frutaimg" alt="">
+    </div>
+</body>
+</html>
+<script>
+    var frutas = [
+        {
+            fruta: "uva",
+            imagem: "uva.png"
+        },
+        {
+            fruta: "maca",
+            imagem: "maca.png"
+        },
+        {
+            fruta: "abacate",
+            imagem: "abacate.png"
+        },
+        {
+            fruta: "laranja",
+            imagem: "laranja.png"
+        },
+        {
+            fruta: "pera",
+            imagem: "pera.jpg"
+        }
+    ];
+
+    document.getElementById("texto").addEventListener("keyup", showText);
+ 
+    function showText() {
+        let frutaSel = frutas.find(item => item.fruta == this.value);
+        if(frutaSel!=undefined)
+            document.getElementById('frutaimg').setAttribute('src',frutaSel.imagem);
+        else
+            document.getElementById('frutaimg').setAttribute('src','');
+    }
+</script>

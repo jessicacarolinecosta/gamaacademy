@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exercicio 1</title>
+</head>
+<body>
+    <input type="text" name="texto" id="texto">
+    <button class="btn">OK</button>
+    <div id="info"></div>
+</body>
+</html>
+<script>
+    document.getElementsByClassName('btn')[0].onclick = () => {
+        let inputElement = document.getElementById('texto');
+        document.getElementById('info').innerText = inputElement.value;
+    }
+</script>

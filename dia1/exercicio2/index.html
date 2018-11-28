@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exercicio 2</title>
+</head>
+<body>
+    <input type="text" name="texto" id="texto">
+    <div id="info"></div>
+</body>
+</html>
+<script>
+    document.getElementById("texto").addEventListener("keydown", showText);
+ 
+    function showText() {
+        document.getElementById('info').innerHTML = this.value;
+    }
+</script>
