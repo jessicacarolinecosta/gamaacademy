@@ -1,0 +1,128 @@
+<html>
+    <head>
+        <title>Foguete</title>
+        <style>
+            .half {
+                width: 50%;
+                float: left;
+                text-align: center;
+            }
+            #foguete {
+                position: fixed;
+                width:100px;
+            }
+            .foguetesel {
+                width: 100px;
+                border: 1px solid #ccc;
+                padding: 20px;
+                cursor: pointer;
+                margin-top: 0px;
+                transition: all 0.3s ease-in-out;
+                -webkit-transition: all 0.3s ease-in-out;
+            }
+            .foguetesel.active {
+                border-color: red;
+            }
+            .foguetesel:hover{
+                -webkit-box-shadow: -1px 1px 10px -1px rgba(230,51,51,1);
+                -moz-box-shadow: -1px 1px 10px -1px rgba(230,51,51,1);
+                box-shadow: -1px 1px 10px -1px rgba(230,51,51,1);
+            }
+            button {
+                background: none;
+                border: 1px solid #ccc;
+                padding: 10px 70px;
+                margin-top: 20px;
+            }
+            input {
+                padding: 6px;
+            }
+            span {
+                font-size: 50px;
+                padding-top: 30px;
+                display: block;
+            }
+            span.warning {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="half">
+            <h1>Contagem Regressiva</h1>
+
+            <h2>Selecione o foguete:</h2>
+            <div class="selecionar">
+                <img src="foguete.png" class="foguetesel active"  onclick="selecionaFoguete(this)">
+                <img src="foguete2.png" class="foguetesel"  onclick="selecionaFoguete(this)">
+                <img src="foguete3.png" class="foguetesel"  onclick="selecionaFoguete(this)">
+            </div>
+
+            <h2>Insira o tempo:</h2>
+            <input type="number" name="tempo" id="tempo" value="10">
+            <br>
+            <button id="start">Iniciar</button>
+            <br>
+            <span class="contagem"></span>
+
+           
+        </div>
+        <div class="half">
+            <img src="foguete.png" id="foguete" style="top: calc(100% - 150px);">
+        </div>
+    </body>
+</html>
+<script>
+    var botao = document.getElementById("start");
+    var audio = new Audio('som.mp3');
+    botao.addEventListener('click',contar);
+    var tempo = 10;
+
+    function contar() {
+        tempo = document.getElementById('tempo').value;
+        botao.setAttribute('disabled',true);
+        updateTempo();
+    }
+
+    function selecionaFoguete(el) {
+        document.getElementById('foguete').setAttribute('src', el.src);
+        let elements = document.getElementsByClassName('foguetesel');
+        for(var i=0;i<elements.length;i++) {
+            elements[i].setAttribute("class","foguetesel");
+        }
+        el.setAttribute('class', 'foguetesel active');
+    }
+
+    function updateTempo() {
+        setTimeout(function(){
+            tempo--;
+            document.getElementsByClassName('contagem')[0].textContent = tempo;
+
+            if(tempo < 4)
+                document.getElementsByClassName('contagem')[0].setAttribute('class','contagem warning');
+
+            if(tempo>0) {
+                updateTempo();
+            } else {
+                audio.play();
+                sobeFoguete();
+            }
+        },1000);
+    }
+
+    function sobeFoguete() {
+        let foguete = document.getElementById('foguete');
+        let position = foguete.offsetTop;
+       
+        setTimeout(function(){
+            
+            if(position>0) {
+              foguete.style.top =  position - 20;
+              sobeFoguete();
+            } else {
+                audio.pause();
+                alert('Foguete Lançado');
+            }
+        },100);
+    }
+</script>

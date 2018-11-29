@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>Exercicio 1</title>
+    </head>
+    <body>
+        <img src="chara-1.png" id="chara" style="position: fixed;">
+    </body>
+</html>
+<script>
+    var imgs = ["chara-1.png", "chara-2.png", "chara-3.png"];
+    var chara = document.getElementById("chara");
+    var index = 0;
+    var speed = 10;
+    var direcao = '';
+
+    window.addEventListener("keyup", getKey);
+    andar(direcao);
+
+    function getKey(e) {
+        let key = e.keyCode;
+        if(key==39) {
+            direcao = 'direita';
+            chara.style.transform = "";
+        } else if (key==37) {
+            direcao = 'esquerda';
+            chara.style.transform = "scaleX(-1)";
+        }
+    }
+
+    function andar() {
+        let position = chara.offsetLeft;
+
+        setTimeout(() => {
+
+            if (direcao=='direita') 
+                chara.style.left = position + speed;
+            else if (direcao=='esquerda')
+                chara.style.left = position - speed;
+            
+            if(position<8) {
+                chara.style.left = 8;
+                chara.setAttribute("src",imgs[0]);
+                chara.style.transform = "";
+                index = 0;
+                direcao='';
+            } else if (position > window.innerWidth-50) {
+                chara.style.left = window.innerWidth-50;
+                chara.setAttribute("src",imgs[0]);
+                chara.style.transform = "scaleX(-1)";
+                index = 0;
+                direcao='';
+            }
+
+            if(direcao!='') {
+                chara.setAttribute("src",imgs[index]);
+                
+                if(index==imgs.length-1)
+                    index = 0;
+                else
+                    index++;
+            }
+
+            andar();
+        }, 100);
+
+    }
+</script>
